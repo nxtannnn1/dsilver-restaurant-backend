@@ -1,5 +1,8 @@
 package sistema.restaurante.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Funcao {
 
     COMUM("Comum"),
@@ -10,10 +13,5 @@ public enum Funcao {
     Funcao (String descricao) {
         this.descricao = descricao;
     }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
 
 }

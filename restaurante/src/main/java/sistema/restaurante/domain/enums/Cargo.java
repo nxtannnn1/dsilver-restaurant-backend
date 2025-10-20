@@ -1,5 +1,8 @@
 package sistema.restaurante.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Cargo {
     GARCOM("Garçom"),
     CAIXA("Caixa");
@@ -10,7 +13,4 @@ public enum Cargo {
         this.descricao=descricao;
     }
 
-    public String getDescricao(){
-        return descricao;
-    }
 }
