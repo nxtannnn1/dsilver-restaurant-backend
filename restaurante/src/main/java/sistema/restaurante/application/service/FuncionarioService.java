@@ -44,8 +44,6 @@ public class FuncionarioService {
     public FuncionarioDTOResponse editarFuncionarioPorId(Long id, FuncionarioDTORequest dto) {
         if (id == null) throw new RuntimeException("ID não pode ser nulo");
         var achado = funcionarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Não foi encontrado um funcionário de id " + id + "!"));
-        ;
-
         String hash = passwordEncoder.encode(dto.getSenha());
         achado.setNome(dto.getNome());
         achado.setFuncao(dto.getFuncao());
@@ -58,10 +56,17 @@ public class FuncionarioService {
     }
 
     @Transactional
-    public void excluirFuncionario(Long id) {
+    public void excluirFuncionarioPorId(Long id) {
         if (id == null) throw new RuntimeException("ID não pode ser nulo");
         var funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Não foi encontrado um funcionário de id " + id + "!"));
         funcionarioRepository.delete(funcionario);
 
     }
+
+    @Transactional
+    public void excluirTodosOsFuncionarios() {
+        funcionarioRepository.deleteAll();
+    }
+
+
 }

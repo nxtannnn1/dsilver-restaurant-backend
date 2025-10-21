@@ -30,7 +30,31 @@ public class FuncionarioController {
     @GetMapping
     public ResponseEntity<List<FuncionarioDTOResponse>> listarFuncionarios(Pageable pageable) {
         var funcionarios = funcionarioService.listarFuncionarios(pageable).getContent();
-        return ResponseEntity.status(HttpStatus.CREATED).body(funcionarios);
+        return ResponseEntity.status(HttpStatus.OK).body(funcionarios);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<FuncionarioDTOResponse> listarFuncionarioPorId(@PathVariable Long id) {
+        var funcionario = funcionarioService.listarFuncionarioPorId(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(funcionario);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirFuncionario(@PathVariable @Valid Long id) {
+        funcionarioService.excluirFuncionarioPorId(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void>excluirTodosOsFuncionarios(){
+        funcionarioService.excluirTodosOsFuncionarios();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FuncionarioDTOResponse> editarFuncionarioPorId(@PathVariable Long id, @RequestBody @Valid FuncionarioDTORequest dto){
+        var funcionario = funcionarioService.editarFuncionarioPorId(id,dto);
+        return ResponseEntity.status(HttpStatus.OK).body(funcionario);
     }
 
 }
